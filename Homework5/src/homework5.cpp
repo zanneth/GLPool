@@ -125,6 +125,7 @@ void Homework5Application::keyboardCallback(unsigned char key, int x, int y)
                 _currentAmplitude = 0.0;
             }
             break;
+        case 'r':
         case 's':
             _currentWaveVelocity = kDefaultWaveVelocity;
             _currentAmplitude = kDefaultAmplitude;
