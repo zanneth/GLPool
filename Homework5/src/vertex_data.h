@@ -31,7 +31,7 @@ static const GLuint poolElementData[14] = {
     5, 4, 7, 6
 };
 
-static const GLuint poolNormalData[5 * 3] = {
+static const GLfloat poolNormalData[5 * 3] = {
     // Top face
     0.0, 1.0, 0.0,
     

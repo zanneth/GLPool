@@ -24,10 +24,13 @@
 
 Homework5Application::Homework5Application(int argc, char **argv) : GraphicsApplication(argc, argv),
     _program(NULL),
-    _projectionMatrixUniform(0),
-    _modelMatrixUniform(0),
     _currentAmplitude(kDefaultAmplitude),
-    _currentWaveVelocity(kDefaultWaveVelocity)
+    _currentWaveVelocity(kDefaultWaveVelocity),
+    _modelMatrixUniform(0),
+    _projectionMatrixUniform(0),
+    _timeUniform(0),
+    _amplitudeUniform(0),
+    _waveVelocityUniform(0)
 {
     setWindowTitle("Homework 5 - Charles Magahern");
     setTimerInterval(16); // 60 FPS
