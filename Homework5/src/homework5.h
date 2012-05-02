@@ -45,7 +45,6 @@ private:
     void _setupGLEW();
     void _setupShaders();
     void _setupBuffers();
-    void _setupPoolBuffers();
     void _setupPhotoBuffers();
     void _setupProjection();
     void _setupImage();

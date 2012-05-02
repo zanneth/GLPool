@@ -50,7 +50,6 @@
 
 /* Begin PBXFileReference section */
 		56C02452154ECB1800AA8565 /* goldengate.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = goldengate.jpg; sourceTree = "<group>"; };
-		56C02454154ECB5500AA8565 /* vertex_data.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = vertex_data.h; sourceTree = "<group>"; };
 		56C36E081541FA9800D8C34F /* Homework5 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Homework5; sourceTree = BUILT_PRODUCTS_DIR; };
 		56C36E1C1541FACB00D8C34F /* application.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = application.cpp; sourceTree = "<group>"; };
 		56C36E1D1541FACB00D8C34F /* application.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = application.h; sourceTree = "<group>"; };
@@ -151,7 +150,6 @@
 				56D80195154E7B9700A2DE50 /* shader_program.cpp */,
 				56D80194154E7B7A00A2DE50 /* shader_program.h */,
 				56C36E2C1541FACB00D8C34F /* transform.h */,
-				56C02454154ECB5500AA8565 /* vertex_data.h */,
 			);
 			path = src;
 			sourceTree = "<group>";

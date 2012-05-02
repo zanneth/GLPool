@@ -9,7 +9,6 @@
 #include "homework5.h"
 #include "gl_includes.h"
 #include "transform.h"
-#include "vertex_data.h"
 
 #include <ctime>
 #include <iostream>
@@ -21,6 +20,20 @@
 #define kDefaultWaveVelocity    3.0f
 #define kWaveVelocityIncrement  0.1f
 #define kAmplitudeIncrement     0.1f
+
+static const GLfloat photoVertexData[4 * 3] = {
+    -5.0, -5.0, -9.5,
+    5.0, -5.0, -9.5,
+    -5.0, 5.0, -9.5,
+    5.0, 5.0, -9.5
+};
+
+static const GLfloat photoTexCoordData[4 * 2] = {
+    0.0, 1.0,
+    1.0, 1.0,
+    0.0, 0.0,
+    1.0, 0.0
+};
 
 Homework5Application::Homework5Application(int argc, char **argv) : GraphicsApplication(argc, argv),
     _program(NULL),
@@ -59,6 +72,8 @@ void Homework5Application::openGLReady()
     _setupBuffers();
     _setupProjection();
     _setupImage();
+    
+    _startNewWave();
 }
 
 void Homework5Application::displayCallback()
@@ -180,44 +195,6 @@ void Homework5Application::_setupBuffers()
     glGenVertexArrays(1, &_vertexArray);
     glBindVertexArray(_vertexArray);
     
-    _setupPoolBuffers();
-    _setupPhotoBuffers();
-    
-    glBindVertexArray(0);
-}
-
-void Homework5Application::_setupPoolBuffers()
-{
-#if 0
-    // Create VBOs
-    glGenBuffers(4, _poolVertexBuffers);
-    
-    // Setup position buffer
-    glBindBuffer(GL_ARRAY_BUFFER, _poolVertexBuffers[0]);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(poolVertexData), poolVertexData, GL_STATIC_DRAW);
-    glVertexAttribPointer(_vertexAttribLocations[kVertexAttribPosition], 3, GL_FLOAT, GL_FALSE, 0, (GLvoid *) NULL);
-    glEnableVertexAttribArray(_vertexAttribLocations[kVertexAttribPosition]);
-    
-    // Setup color buffer
-    glBindBuffer(GL_ARRAY_BUFFER, _poolVertexBuffers[1]);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(poolColorData), poolColorData, GL_STATIC_DRAW);
-    glVertexAttribPointer(_vertexAttribLocations[kVertexAttribColor], 3, GL_FLOAT, GL_FALSE, 0, (GLvoid *) NULL);
-    glEnableVertexAttribArray(_vertexAttribLocations[kVertexAttribColor]);
-    
-    // Setup normals buffer
-    glBindBuffer(GL_ARRAY_BUFFER, _poolVertexBuffers[2]);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(poolNormalData), poolNormalData, GL_STATIC_DRAW);
-    glVertexAttribPointer(_vertexAttribLocations[kVertexAttribNormal], 3, GL_FLOAT, GL_FALSE, 0, (GLvoid *) NULL);
-    glEnableVertexAttribArray(_vertexAttribLocations[kVertexAttribNormal]);
-    
-    // Setup elements buffer
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _poolVertexBuffers[3]);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(poolElementData), poolElementData, GL_STATIC_DRAW);
-#endif
-}
-
-void Homework5Application::_setupPhotoBuffers()
-{
     // Create VBOs
     glGenBuffers(2, _photoVertexBuffers);
     
@@ -231,7 +208,9 @@ void Homework5Application::_setupPhotoBuffers()
     glBindBuffer(GL_ARRAY_BUFFER, _photoVertexBuffers[1]);
     glBufferData(GL_ARRAY_BUFFER, sizeof(photoTexCoordData), photoTexCoordData, GL_STATIC_DRAW);
     glVertexAttribPointer(kVertexAttribTexCoord0, 2, GL_FLOAT, GL_FALSE, 0, (GLvoid *) NULL);
-    glEnableVertexAttribArray(kVertexAttribTexCoord0);
+    glEnableVertexAttribArray(kVertexAttribTexCoord0); 
+    
+    glBindVertexArray(0);
 }
 
 void Homework5Application::_setupProjection()
