@@ -1,0 +1,28 @@
+GLPool
+===================
+
+This is a homework assignment I completed in college for a computer graphics
+course. It's supposed to simulate a pool of water resting on top of a picture
+at the bottom of the pool.
+
+Controls
+-------------------
+d = start new wave
+A/a = increase/decrease amplitude
+V/v = increase/decrease wave velocity
+r = reset everything
+
+Compiling
+-------------------
+This project requires GLEW (OpenGL Extension Wrangler) in order to compile. If
+you have homebrew installed on your Mac system, run `brew install glew` before
+compiling.
+
+Running
+-------------------
+You must have a graphics card that is capable of compiling and running shaders
+using a driver that supports GLSL 1.1 or greater.
+
+Credits
+-------------------
+Charles Magahern <charles@magahern.com>
