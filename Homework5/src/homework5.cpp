@@ -8,7 +8,6 @@
 
 #include "homework5.h"
 #include "gl_includes.h"
-#include "transform.h"
 
 #include <ctime>
 #include <iostream>
@@ -16,16 +15,17 @@
 #define kImageWidth     1280.0f
 #define kImageHeight    853.0f
 
-#define kDefaultAmplitude       0.0f
-#define kDefaultWaveVelocity    3.0f
+#define kDefaultAmplitude       1.0f
+#define kDefaultWaveVelocity    1.0f
+#define kStartingTime           100.0f
 #define kWaveVelocityIncrement  0.1f
 #define kAmplitudeIncrement     0.1f
 
 static const GLfloat photoVertexData[4 * 3] = {
-    -5.0, -5.0, -9.5,
-    5.0, -5.0, -9.5,
-    -5.0, 5.0, -9.5,
-    5.0, 5.0, -9.5
+    -5.0, -5.0, -10.0,
+    5.0, -5.0, -10.0,
+    -5.0, 5.0, -10.0,
+    5.0, 5.0, -10.0
 };
 
 static const GLfloat photoTexCoordData[4 * 2] = {
@@ -37,8 +37,10 @@ static const GLfloat photoTexCoordData[4 * 2] = {
 
 Homework5Application::Homework5Application(int argc, char **argv) : GraphicsApplication(argc, argv),
     _program(NULL),
+    _currentTime(kStartingTime),
     _currentAmplitude(kDefaultAmplitude),
     _currentWaveVelocity(kDefaultWaveVelocity),
+    _currentTransform(Transform::identityTransform()),
     _modelMatrixUniform(0),
     _projectionMatrixUniform(0),
     _timeUniform(0),
@@ -72,8 +74,6 @@ void Homework5Application::openGLReady()
     _setupBuffers();
     _setupProjection();
     _setupImage();
-    
-    _startNewWave();
 }
 
 void Homework5Application::displayCallback()
@@ -95,6 +95,7 @@ void Homework5Application::timerFiredCallback()
     
     // Update model-view matrix
     Transform modelTransform = Transform::identityTransform();
+    modelTransform *= _currentTransform;
     modelTransform *= Transform::lookAt(_mainCamera.position, _mainCamera.look, Vecf(0.0, 1.0, 0.0));
     
     if (!_modelMatrixUniform) {
@@ -107,15 +108,8 @@ void Homework5Application::timerFiredCallback()
     glUniform1f(_timeUniform, _currentTime);
     _currentTime += 0.01;
     
-    
     // Update amplitude uniform
     glUniform1f(_amplitudeUniform, _currentAmplitude);
-    if (_currentAmplitude > 0.0) {
-        _currentAmplitude -= 0.001;
-    } else {
-        _currentAmplitude = 0.0;
-    }
-    
     
     // Update wave velocity uniform
     glUniform1f(_waveVelocityUniform, _currentWaveVelocity);
@@ -147,6 +141,7 @@ void Homework5Application::keyboardCallback(unsigned char key, int x, int y)
         case 's':
             _currentWaveVelocity = kDefaultWaveVelocity;
             _currentAmplitude = kDefaultAmplitude;
+            _currentTime = kStartingTime;
             break;
         case 'd':
             _startNewWave();
@@ -240,6 +235,5 @@ void Homework5Application::_setupImage()
 
 void Homework5Application::_startNewWave()
 {
-    _currentWaveVelocity = kDefaultWaveVelocity;
-    _currentAmplitude = 1.0;
+    _currentTime = 0.0;
 }

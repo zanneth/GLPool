@@ -13,14 +13,13 @@ uniform float waveVelocity;
 varying vec2 frag_texcoord0;
 
 const float PI = 3.14159265358979;
-const vec4 wallColor = vec4(0.0, 0.0, 1.0, 1.0);
+const vec4 wallColor = vec4(0.0, 0.0, 0.0, 1.0);
 
 float heightOfWave(float r)
 {
-    float t = (time / 10.0);
-    float v = waveVelocity;
-    float amp = -(amplitude / (1.0 + pow(r, 2.0)));
-    float height = amp * pow(sin((v*t - r)*2.0*PI), 2.0) + 1.0;
+    float t = (time / 10.0) * (waveVelocity + 60.0);
+    float A = -amplitude / (1.0 + pow(5.0*r - t, 2.0));
+    float height = A * pow(cos(2.0*PI*r - t), 2.0) + 1.0;
     
     return height;
 }
@@ -70,6 +69,7 @@ void main(void)
     
     vec2 final = polarToCartesian(vec2(r2, theta));
     final += 0.5;
+    
     
     vec4 color;
     if (final.x < 0.0 || final.y < 0.0 || final.x > 1.0 || final.y > 1.0) {

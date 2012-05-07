@@ -12,6 +12,7 @@
 #include "objects.h"
 #include "picture.h"
 #include "shader_program.h"
+#include "transform.h"
 
 class Homework5Application : public GraphicsApplication {
     ShaderProgram *_program;
@@ -25,6 +26,8 @@ class Homework5Application : public GraphicsApplication {
     GLfloat _currentTime;
     GLfloat _currentAmplitude;
     GLfloat _currentWaveVelocity;
+    
+    Transform _currentTransform;
     
     GLuint _modelMatrixUniform;
     GLuint _projectionMatrixUniform;
