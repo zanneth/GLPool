@@ -16,9 +16,9 @@
 #define kImageHeight    853.0f
 
 #define kDefaultAmplitude       1.0f
-#define kDefaultWaveVelocity    1.0f
+#define kDefaultWaveVelocity    30.0f
 #define kStartingTime           100.0f
-#define kWaveVelocityIncrement  0.1f
+#define kWaveVelocityIncrement  1.0f
 #define kAmplitudeIncrement     0.1f
 
 static const GLfloat photoVertexData[4 * 3] = {
