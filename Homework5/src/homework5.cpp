@@ -45,10 +45,7 @@ Homework5Application::Homework5Application(int argc, char **argv) : GraphicsAppl
     _timeUniform(0),
     _amplitudeUniform(0),
     _waveVelocityUniform(0)
-{
-    setWindowTitle("Homework 5 - Charles Magahern");
-    setTimerInterval(16); // 60 FPS
-}
+{}
 
 Homework5Application::~Homework5Application()
 {
@@ -62,6 +59,9 @@ Homework5Application::~Homework5Application()
 
 void Homework5Application::openGLReady()
 {
+    setWindowTitle("Homework 5 - Charles Magahern");
+    setTimerInterval(16); // 60 FPS
+    
     glEnable(GL_DEPTH_TEST);
     glShadeModel(GL_SMOOTH);
     
