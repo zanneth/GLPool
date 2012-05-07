@@ -41,6 +41,8 @@ public:
     virtual void reshapeCallback(int width, int height);
 	virtual void keyboardCallback(unsigned char key, int x, int y) {}
     virtual void specialKeyboardCallback(int key, int x, int y) {}
+    virtual void mouseCallback(int button, int state, int x, int y) {}
+    virtual void mouseMotionCallback(int x, int y) {}
 	virtual void idleCallback() {}
     virtual void timerFiredCallback() {}
 	virtual void openGLReady() {}

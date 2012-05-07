@@ -40,7 +40,6 @@ Homework5Application::Homework5Application(int argc, char **argv) : GraphicsAppl
     _currentTime(kStartingTime),
     _currentAmplitude(kDefaultAmplitude),
     _currentWaveVelocity(kDefaultWaveVelocity),
-    _currentTransform(Transform::identityTransform()),
     _modelMatrixUniform(0),
     _projectionMatrixUniform(0),
     _timeUniform(0),
@@ -95,7 +94,10 @@ void Homework5Application::timerFiredCallback()
     
     // Update model-view matrix
     Transform modelTransform = Transform::identityTransform();
-    modelTransform *= _currentTransform;
+    modelTransform *= Transform::translationTransform(0, 0, 10.0);
+    modelTransform *= Transform::rotationTransform(_currentRotation.x, 1, 0, 0);
+    modelTransform *= Transform::rotationTransform(_currentRotation.y, 0, 1, 0);
+    modelTransform *= Transform::translationTransform(0, 0, -10.0);
     modelTransform *= Transform::lookAt(_mainCamera.position, _mainCamera.look, Vecf(0.0, 1.0, 0.0));
     
     if (!_modelMatrixUniform) {
@@ -149,6 +151,28 @@ void Homework5Application::keyboardCallback(unsigned char key, int x, int y)
         default:
             break;
     }
+}
+
+void Homework5Application::mouseCallback(int button, int state, int x, int y)
+{
+    if (state == GLUT_UP) {
+        _prevMouse = Vec<int>(0, 0);
+    }
+}
+
+void Homework5Application::mouseMotionCallback(int x, int y)
+{
+    Vec<int> velocity;
+    
+    if (_prevMouse.x != 0 && _prevMouse.y != 0) {
+        velocity.x = x - _prevMouse.x;
+        velocity.y = y - _prevMouse.y;
+        
+        _currentRotation.x += velocity.y;
+        _currentRotation.y += velocity.x;
+    }
+    
+    _prevMouse = Vec<int>(x, y);
 }
 
 

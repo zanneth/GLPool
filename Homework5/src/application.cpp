@@ -14,6 +14,8 @@ void displayCallback__internal();
 void reshapeCallback__internal(int width, int height);
 void keyboardCallback__internal(unsigned char key, int x, int y);
 void specialKeyboardCallback__internal(int key, int x, int y);
+void mouseCallback__internal(int button, int state, int x, int y);
+void mouseMotionCallback__internal(int x, int y);
 void idleCallback__internal();
 void timerFiredCallback__internal(int value);
 
@@ -88,6 +90,8 @@ void GraphicsApplication::_initializeCallbacks()
     glutReshapeFunc(reshapeCallback__internal);
 	glutKeyboardFunc(keyboardCallback__internal);
     glutSpecialFunc(specialKeyboardCallback__internal);
+    glutMouseFunc(mouseCallback__internal);
+    glutMotionFunc(mouseMotionCallback__internal);
 	glutIdleFunc(idleCallback__internal);
 }
 
@@ -117,6 +121,16 @@ void keyboardCallback__internal(unsigned char key, int x, int y)
 void specialKeyboardCallback__internal(int key, int x, int y)
 {
     currentApplication->specialKeyboardCallback(key, x, y);
+}
+
+void mouseCallback__internal(int button, int state, int x, int y)
+{
+    currentApplication->mouseCallback(button, state, x, y);
+}
+
+void mouseMotionCallback__internal(int x, int y)
+{
+    currentApplication->mouseMotionCallback(x, y);
 }
 
 void idleCallback__internal()

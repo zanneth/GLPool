@@ -27,13 +27,14 @@ class Homework5Application : public GraphicsApplication {
     GLfloat _currentAmplitude;
     GLfloat _currentWaveVelocity;
     
-    Transform _currentTransform;
-    
     GLuint _modelMatrixUniform;
     GLuint _projectionMatrixUniform;
     GLuint _timeUniform;
     GLuint _amplitudeUniform;
     GLuint _waveVelocityUniform;
+    
+    Vec<int> _prevMouse;
+    Vec<float> _currentRotation;
     
 public:
     Homework5Application(int argc, char **argv);
@@ -43,6 +44,8 @@ public:
     void displayCallback();
     void timerFiredCallback();
 	void keyboardCallback(unsigned char key, int x, int y);
+    void mouseCallback(int button, int state, int x, int y);
+    void mouseMotionCallback(int x, int y);
     
 private:
     void _setupGLEW();
